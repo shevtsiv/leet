@@ -21,6 +21,24 @@ fun romanToInt(s: String): Int {
 }
 
 /**
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+fun romanToIntOptimized(s: String): Int {
+    var result = 0
+    for (i in 0 until s.length - 1) {
+        val currentDigit = convertToInt(s[i])
+        val nextDigit = convertToInt(s[i + 1])
+        if (currentDigit >= nextDigit) {
+            result += currentDigit
+        } else {
+            result -= currentDigit
+        }
+    }
+    return result + convertToInt(s.last())
+}
+
+/**
  * Time Complexity: O(1)
  * Space Complexity: O(1)
  */

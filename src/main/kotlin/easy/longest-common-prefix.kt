@@ -52,3 +52,43 @@ fun longestCommonPrefixBruteforceUsingIndex(strs: Array<String>): String {
     }
     return strs[0]
 }
+
+/**
+ * Time Complexity: O(n^2)
+ * Space Complexity: O(k^2), where k - length of the shortest string in the array
+ */
+fun longestCommonPrefixBruteforceUsingHorizontalScan(strs: Array<String>): String {
+    if (strs.isEmpty() || strs[0].isEmpty()) {
+        return ""
+    }
+    if (strs.size == 1) {
+        return strs[0]
+    }
+    var prefix = getCommonLongestPrefix(strs[0], strs[1])
+    for (i in 2 until strs.size) {
+        if (prefix.isEmpty()) {
+            return ""
+        }
+        val str = strs[i]
+        prefix = getCommonLongestPrefix(prefix, str)
+    }
+    return prefix
+}
+
+/**
+ * Time Complexity: O(min(n,m)), where n - length of the first string, m - length of the second string
+ * Space Complexity: O(1), worst case: O(k), where k - common prefix length which is shorter than the shorter string
+ */
+fun getCommonLongestPrefix(first: String, second: String): String {
+    val minimumLengthString = if (first.length > second.length) {
+        second
+    } else {
+        first
+    }
+    for (i in minimumLengthString.indices) {
+        if (first[i] != second[i]) {
+            return minimumLengthString.substring(0, i)
+        }
+    }
+    return minimumLengthString
+}

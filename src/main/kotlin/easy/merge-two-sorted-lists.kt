@@ -42,3 +42,38 @@ fun mergeTwoLists(l1: ListNode?, l2: ListNode?): ListNode? {
     }
     return finalResultReference.next
 }
+
+/**
+ * Time Complexity: O(n + m), where n - length of the first list, m - length of the second list
+ * Space Complexity: O(1)
+ */
+fun mergeTwoListsInPlace(l1: ListNode?, l2: ListNode?): ListNode? {
+    var result = ListNode(0)
+    val finalResultReference = result
+    var first = l1
+    var second = l2
+    while (first != null && second != null) {
+        val v1 = first.`val`
+        val v2 = second.`val`
+        if (v1 < v2) {
+            result.next = first
+            result = first
+            first = first.next
+        } else {
+            result.next = second
+            result = second
+            second = second.next
+        }
+    }
+    while (first != null) {
+        result.next = first
+        result = first
+        first = first.next
+    }
+    while (second != null) {
+        result.next = second
+        result = second
+        second = second.next
+    }
+    return finalResultReference.next
+}

@@ -3,11 +3,26 @@ package easy
 import kotlin.math.pow
 
 class ConvertBinaryNumberInALinkedListToInteger {
+
+    /**
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    fun getDecimalValueUsingShift(head: ListNode?): Int {
+        var node = head
+        var result = 0
+        while (node != null) {
+            result = (result shl 1) or node.`val`
+            node = node.next
+        }
+        return result
+    }
+
     /**
      * Time Complexity: O(2n) => O(n)
      * Space Complexity: O(1)
      */
-    fun getDecimalValue(head: ListNode?): Int {
+    fun getDecimalValueByReversingList(head: ListNode?): Int {
         var prev: ListNode? = null
         var current = head
         while (current != null) {

@@ -18,4 +18,10 @@ class MajorityElementSolution {
         }
         return -1
     }
+
+    /**
+     * Time Complexity: O(n)
+     * Space Complexity: O(n)
+     */
+    fun majorityElementIdiomatically(nums: IntArray): Int = nums.groupBy { it }.maxBy { it.value.size }!!.key
 }

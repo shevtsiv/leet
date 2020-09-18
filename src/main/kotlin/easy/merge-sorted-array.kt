@@ -3,10 +3,30 @@ package easy
 class MergeSortedArraySolution {
 
     /**
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    fun mergeUsingThreePointers(nums1: IntArray, m: Int, nums2: IntArray, n: Int) {
+        var i = m - 1
+        var j = n - 1
+        var endPointer = m + n - 1
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[endPointer--] = nums1[i--]
+            } else {
+                nums1[endPointer--] = nums2[j--]
+            }
+        }
+        while (j >= 0) {
+            nums1[endPointer--] = nums2[j--]
+        }
+    }
+
+    /**
      * Time Complexity: O((n^2)log(n))
      * Space Complexity: O(1)
      */
-    fun merge(nums1: IntArray, mInitial: Int, nums2: IntArray, _n: Int) {
+    fun mergeUsingBinarySearch(nums1: IntArray, mInitial: Int, nums2: IntArray, _n: Int) {
         var m = mInitial - 1
         for (x in nums2) {
             insertIntoAt(x, nums1, findInsertPosition(nums1, m++, x))
